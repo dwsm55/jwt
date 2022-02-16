@@ -14,8 +14,8 @@ app.get('/api/login', function(req, res){
     const userInfo = { 
         email : "test@gmail.com",
         ostype : "mobile",
-        mailSubscribe : true,
-        permission : "admin"
+        snsAgree : true,
+        auth : "admin"
     };
     const expire = {
         expiresIn: 60
@@ -35,8 +35,6 @@ app.get('/api/protected', ensureToken, function(req, res){
 
     jwt.verify(req.token, secretKey, function(err, decoded){
         if(err) {
-            console.log(err.message);       //jwt expired
-
             let outputMsg = "";
             switch (err.message) {
                 case "invalid signature":                    

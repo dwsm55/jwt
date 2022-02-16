@@ -24,10 +24,25 @@ key : authorization<br>
 value : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwib3N0eXBlIjoibW9iaWxlIn0sImlhdCI6MTY0NTAxNjkyM30.SeZ9mOaJIf31lJWA2V3ZUlDXOho_mM1gRZTENIz0gi
 
 # 인증 응답
+<pre>
 성공
 {
-    "message": "this is protected"
+    "message": {
+        "userInfo": {
+            "email": "test@gmail.com",
+            "ostype": "mobile",
+            "snsAgree": true,
+            "auth": "admin"
+        },
+        "iat": 1645055735,
+        "exp": 1645055795
+    }
 }
+</pre>
 <br>
+<pre>
 실패
-Forbidden
+{
+    "message": <에러메시지>
+}
+</pre>
