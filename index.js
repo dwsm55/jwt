@@ -13,20 +13,54 @@ app.get('/api/login', function(req, res){
     //auth user
     const userInfo = { 
         email : "test@gmail.com",
-        ostype : "mobile"
-    };
-    const token = jwt.sign({userInfo}, secretKey)
-    res.json({
-        jsonwebtoken : token,
+        ostype : "mobile",
         mailSubscribe : true,
         permission : "admin"
+    };
+    const expire = {
+        expiresIn: 60
+    };
+
+    const token = jwt.sign(
+        {userInfo}, 
+        secretKey,
+        expire
+    )
+    res.json({
+        jsonwebtoken : token       
     });
 });
 
 app.get('/api/protected', ensureToken, function(req, res){
-    res.json({
-        message : "this is protected"
+
+    jwt.verify(req.token, secretKey, function(err, decoded){
+        if(err) {
+            console.log(err.message);       //jwt expired
+
+            let outputMsg = "";
+            switch (err.message) {
+                case "invalid signature":                    
+                    outputMsg = "invalid signature";
+                    break;
+                case "secret key check":                    
+                    outputMsg = "secret key check";
+                    break;
+                default:
+                    outputMsg = err.message;
+                    break;
+            }
+
+            res.json({
+                message : outputMsg
+            });
+        }else {            
+            console.log(decoded);
+            res.json({
+                message : decoded
+            });
+        }
     });
+   
 });
 
 function ensureToken(req, res, next) {
@@ -37,7 +71,10 @@ function ensureToken(req, res, next) {
         req.token = bearerToken;
         next();
     }else {
-        res.sendStatus(403);
+        // res.sendStatus(403);
+        res.json({
+            message : "authorization error"
+        });
     }
 }
 
