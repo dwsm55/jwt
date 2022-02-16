@@ -18,8 +18,8 @@ http://127.0.0.1:8080/api/login
 }
 
 # 인증 호출
-127.0.0.1:8080/api/protected
-헤더 아래 추가 
+127.0.0.1:8080/api/protected<br>
+헤더 추가<br>
 key : authorization<br> 
 value : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwib3N0eXBlIjoibW9iaWxlIn0sImlhdCI6MTY0NTAxNjkyM30.SeZ9mOaJIf31lJWA2V3ZUlDXOho_mM1gRZTENIz0gi
 
