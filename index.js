@@ -11,20 +11,26 @@ app.get('/api', function(req, res){
 
 app.get('/api/login', function(req, res){
     //auth user
+
+
+    // payload
     const userInfo = { 
         email : "test@gmail.com",
         ostype : "mobile",
         snsAgree : true,
         auth : "admin"
     };
-    const expire = {
+
+    // option
+    const options = {
+        algorithm : "HS256",
         expiresIn: 60
     };
 
     const token = jwt.sign(
         {userInfo}, 
         secretKey,
-        expire
+        options
     )
     res.json({
         jsonwebtoken : token       
